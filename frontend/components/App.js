@@ -40,8 +40,17 @@ changeInput = (key, value) => {
   })
 }
 
-addToDo = () => {
+handleAdd = () => {
+  const newTask = {
+    name: 'this is a test task',
+    id: getId(),
+    completed: true
+  }
 
+  this.setState({
+    ...this.state,
+    toDos: [...this.state.toDos, newTask]
+  })
 }
 
 handleClear = () =>{
@@ -64,7 +73,7 @@ handleClear = () =>{
       <div>
         <h1>Todos:</h1>
       <TodoList  toDos={toDos} />
-        < Form onChange={this.changeInput} values={form} onSubmit={this.addToDo} />
+        < Form onChange={this.changeInput} values={form} handleAdd={this.handleAdd}  />
         <button onClick={this.handleClear}>clear</button>
       </div>
     )

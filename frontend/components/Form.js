@@ -1,17 +1,13 @@
 import React from 'react'
 
+
 export default class Form extends React.Component {
-  onSubmit = evt => {
-    evt.preventDefault()
-    console.log('we are submitting now')
-    this.props.onSubmit()
+  addToDo = (evt) => {
+      evt.preventDefault()
+     console.log('submit clicked')
+     this.props.handleAdd()
   }
   
-  onChange = evt => {
-    const { value, id } = evt.target
-console.log('i am changing', id, value)
-    this.props.onChange(id, value)
-  }
   
   render() {
     const { values } = this.props
@@ -27,6 +23,7 @@ console.log('i am changing', id, value)
         /> 
         <input 
         type='submit'
+        onClick={this.addToDo}
         />
         </form>
       </div>
