@@ -2,15 +2,20 @@ import React from 'react'
 
 
 export default class Form extends React.Component {
+  state = this.props.state
   addToDo = (evt) => {
       evt.preventDefault()
      console.log('submit clicked')
-     this.props.handleAdd()
+     this.props.handleAdd(this.state.input)
   }
   
-  
+  handleChange = (evt) => {
+    this.setState({
+      ...this.state, 
+      input: evt.target.value
+    })
+  }
   render() {
-    const { values } = this.props
     return (
       <div>
         <form onSubmit={this.onSubmit}>
@@ -18,8 +23,7 @@ export default class Form extends React.Component {
         type='text'
         id='textInput'
         placeholder='type todo'
-        onChange={this.onChange}
-        value={values}
+        onChange={this.handleChange}
         /> 
         <input 
         type='submit'

@@ -33,22 +33,19 @@ const initialState = {
 export default class App extends React.Component {
 state = initialState
 
-//all state changing methods will go here
-changeInput = (key, value) => {
-  this.state({...this.state,
-    form: { ...this.state.form, [key]:value }
-  })
-}
 
-handleAdd = () => {
+
+
+handleAdd = (task) => {
   const newTask = {
-    name: 'this is a test task',
+    name: task,
     id: getId(),
     completed: true
   }
 
   this.setState({
     ...this.state,
+    form: initialState.form.textInput,
     toDos: [...this.state.toDos, newTask]
   })
 }
@@ -73,7 +70,7 @@ handleClear = () =>{
       <div>
         <h1>Todos:</h1>
       <TodoList  toDos={toDos} />
-        < Form onChange={this.changeInput} values={form} handleAdd={this.handleAdd}  />
+        < Form state={this.state} handleAdd={this.handleAdd}  />
         <button onClick={this.handleClear}>clear</button>
       </div>
     )
