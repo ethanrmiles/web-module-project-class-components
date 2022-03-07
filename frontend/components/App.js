@@ -45,7 +45,7 @@ handleAdd = (task) => {
 
   this.setState({
     ...this.state,
-    form: initialState.form.textInput,
+    form: initialState.form,
     toDos: [...this.state.toDos, newTask]
   })
 }
@@ -60,6 +60,21 @@ handleClear = () =>{
   })
 }
 
+handleToggle = (clickedId) => {
+  this.setState({
+    ...this.state, 
+    toDos: this.state.toDos.map(todo => {
+      if(todo.id === clickedId) {
+        return {
+          ...todo, 
+          completed: !todo.completed
+        }
+      }
+      return todo
+    })
+  })
+}
+
   render() {
     console.log('rendering with props', this.props)
     console.log('rendering with state is', this.state)
@@ -69,7 +84,7 @@ handleClear = () =>{
     return (
       <div>
         <h1>Todos:</h1>
-      <TodoList  toDos={toDos} />
+      <TodoList handleToggle={this.handleToggle} toDos={toDos} />
         < Form state={this.state} handleAdd={this.handleAdd}  />
         <button onClick={this.handleClear}>clear</button>
       </div>
